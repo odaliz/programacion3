@@ -1,0 +1,54 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace trabajo3programacion3
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btncraar_Click(object sender, EventArgs e)
+        {
+            operacion open = new operacion();
+            open.ConsultaSinResultado (" inser into empleados (nombre,apellido,sexo,fechanaci,fechaingre) values ('" + txtnombre.Text.ToString() + "','" + txtapellido.Text.ToString() + "','" + txtsexo.Text.ToString() + "','" + txtfechanaci.Text.ToString() + "','" + txtfechaingreso.Text.ToString() + ")");
+        }
+
+        private void tbtactualizar_Click(object sender, EventArgs e)
+        {
+
+                operacion open = new operacion();
+            open.ConsultaSinResultado(" uptate empleados (nombre= '" + txtnombre.Text.ToString() + "',apellido= '" + txtapellido.Text.ToString() + "' ,sexo= '" + txtsexo.Text.ToString() + "',fechanaci= '" + txtfechanaci.Text.ToString() + "' ,fechaingre='" + txtfechaingreso.Text.ToString() + "' WHERE id='" + txtid + "')");
+
+
+        }
+
+        private void btnborrar_Click(object sender, EventArgs e)
+        {
+
+
+            operacion open = new operacion();
+            open.ConsultaSinResultado(" delete from empleados where idempleado= '" + txtid + "')");
+
+        }
+
+        private void btngauldar_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
