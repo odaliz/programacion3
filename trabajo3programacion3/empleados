@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SQLite;
+
+namespace programacion3
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpIngreso_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btNuevoEmp_Click(object sender, EventArgs e)
+        {
+            string codigodepart;
+            string codigocargo;
+            string estado;
+            operacion open = new operacion();
+          
+            DataSet ds = new DataSet();
+            ds = open.ConsultaConResultado("SELECT id_depart FROM departamentos WHERE descrip_depart = '" + cbDepartamento.Text + "'");
+            codigodepart = ds.Tables[0].Rows[0][0].ToString();
+
+            ds = open.ConsultaConResultado("SELECT id_cargo FROM cargos WHERE descrip_cargo = '" + cbCargo.Text + "'");
+            codigocargo = ds.Tables[0].Rows[0][0].ToString();
+
+            ds = open.ConsultaConResultado("SELECT id_estado FROM estados WHERE descrip_estado = '");
+            estado = ds.Tables[0].Rows[0][0].ToString();
+            if (tbNombres.Text != "" && tbApellidos.Text != "" && tbCedula.Text != "" && dtpNacimiento.Text != "" && cbSexo.Text != "" && dtpIngreso.Text != "" && tbSueldo.Text != "" && cbCargo.Text != "" && cbDepartamento.Text != "")
+            {
+                open.ConsultaSinResultado("INSERT INTO empleados (nombre_emp, apellido_emp, cedula_emp, fecha_nac, sexo, fecha_ingr, sueldo, id_cargo, id_depart, id_estado, foto)VALUES('" + tbNombres.Text.ToString() + "','" + tbApellidos.Text.ToString() + "','" + tbCedula.Text.ToString() + "','" + dtpNacimiento.Text.ToString() + "','" + cbSexo.Text.ToString() + "','" + dtpIngreso.Text.ToString() + "','" + tbSueldo.Text + "','" + codigocargo + "','" + codigodepart + "','" + estado +  "')");
+                tbNombres.Clear();
+                tbApellidos.Clear();
+                tbCedula.Clear();
+                cbSexo.Text = "";
+                tbIDEmp.Clear();
+                cbDepartamento.Text = "";
+                cbCargo.Text = "";
+                
+                tbSueldo.Clear();
+                dtpNacimiento.Value = DateTime.Now;
+                dtpIngreso.Value = DateTime.Now;
+                pictureBox1.Image = null;
+                MessageBox.Show("Datos registrados correctamente!");
+            }
+            else
+            {
+                MessageBox.Show("incompleto! ");
+            }
+        
+    }
+
+        private void cbSexo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbIDEmp_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
