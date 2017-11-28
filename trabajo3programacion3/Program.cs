@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace trabajo3programacion3
+namespace cargo
 {
     static class Program
     {
